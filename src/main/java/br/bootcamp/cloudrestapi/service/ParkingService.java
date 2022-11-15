@@ -1,4 +1,4 @@
-package br.bootcamp.cloudrestapi.Service;
+package br.bootcamp.cloudrestapi.service;
 
 import java.time.LocalDateTime;
 import java.util.List;

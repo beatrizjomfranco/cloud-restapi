@@ -17,10 +17,7 @@
 	
 	<properties>
 		<java.version>11</java.version>
-	 	<springfox-swagger.version>2.9.2</springfox-swagger.version
-        	<modelmapper.version>2.3.5</modelmapper.version>
-        	<testcontainers.version>1.15.0</testcontainers.version>
-	</properties>
+	        </properties>
 	
 	<dependencies>
 		
@@ -36,23 +33,23 @@
 			<optional>true</optional>
 		</dependency>
 	
-	        <dependency>
-            		<groupId>org.modelmapper</groupId>
-            		<artifactId>modelmapper</artifactId>
-            		<version>${modelmapper.version}</version>
-        	</dependency>
-
-	        <dependency>
-		        <groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-            		<version>${springfox-swagger.version}</version>
-        	</dependency>
+		<dependency>
+  			<groupId>org.modelmapper</groupId>
+  			<artifactId>modelmapper</artifactId>
+  			<version>3.0.0</version>
+		</dependency>
+	        
+		<dependency>
+    			<groupId>io.springfox</groupId>
+    			<artifactId>springfox-swagger2</artifactId>
+    			<version>3.0.0</version>
+		</dependency>
 
 		<dependency>
-            		<groupId>io.springfox</groupId>
-            		<artifactId>springfox-swagger-ui</artifactId>
-            		<version>${springfox-swagger.version}</version>
-        	</dependency>
+    			<groupId>io.springfox</groupId>
+    			<artifactId>springfox-swagger-ui</artifactId>
+    			<version>3.0.0</version>
+		</dependency>
 	
 	        <dependency>
         		<groupId>org.springframework.boot</groupId>
@@ -81,11 +78,11 @@
 		</dependency>
 
 	        <dependency>
-        		<groupId>org.testcontainers</groupId>
-            		<artifactId>postgresql</artifactId>
-            		<version>${testcontainers.version}</version>
-            		<scope>test</scope>
-        	</dependency>
+    			<groupId>org.testcontainers</groupId>
+    			<artifactId>postgresql</artifactId>
+    			<version>1.17.5</version>
+    			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 

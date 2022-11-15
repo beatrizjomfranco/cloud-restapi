@@ -1,41 +1,89 @@
 package br.bootcamp.cloudrestapi.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.bootcamp.cloudrestapi.Service.ParkingService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+import br.bootcamp.cloudrestapi.controller.dto.ParkingCreateDTO;
+import br.bootcamp.cloudrestapi.controller.dto.ParkingDTO;
+import br.bootcamp.cloudrestapi.controller.mapper.ParkingMapper;
 import br.bootcamp.cloudrestapi.model.Parking;
+import br.bootcamp.cloudrestapi.service.ParkingService;
 
 @RestController
-@RequestMapping("/parking") // http://localhost:8080/parking
+@RequestMapping("/parking")
+@Api(tags = "Parking Controller")
 
 public class ParkingController 
 {
 
-        private final ParkingService parkingService;
-        
-//criação de um construtor para parkingService
-        public ParkingController(ParkingService parkingService) 
-        {
-                this.parkingService = parkingService;
-        }
+    private final ParkingService parkingService;
+    private final ParkingMapper parkingMapper;
 
+//criação do costrutuor 
+    public ParkingController(ParkingService parkingService, ParkingMapper parkingMapper) {
+        this.parkingService = parkingService;
+        this.parkingMapper = parkingMapper;
+    }
 
-        @GetMapping
-        public List<Parking> findAll()
-        {
-/* como se criou o construtor parkingService, os dados abaixo não serão utilizados
-                var parking = new Parking(); //importar parking
-                parking.setColor("Prata");
-                parking.setModel("MiniCooper Contryman");
-                parking.setLicense("A1B2C3");//placa do carro
-                parking.setState("São Paulo");
-*/
-                return parkingService.findAll();
+    @GetMapping
+    @ApiOperation("Find all parkings")
+    public ResponseEntity<List<ParkingDTO>> findAll() 
+    {
+        List<Parking> parkingList = parkingService.findAll();
+        List<ParkingDTO> result = parkingMapper.toParkingDTOList(parkingList);
+        return ResponseEntity.ok(result);
+    }
 
-        }
+    @GetMapping("/{id}")
+        public ResponseEntity<ParkingDTO> findById(@PathVariable String id) 
+    {
+        Parking parking = parkingService.findById(id);
+        ParkingDTO result = parkingMapper.toParkingDTO(parking);
+        return ResponseEntity.ok(result);
+    }
+
+    @DeleteMapping("/{id}")
+        public ResponseEntity delete(@PathVariable String id) 
+    {
+        parkingService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping
+    public ResponseEntity<ParkingDTO> create(@RequestBody ParkingCreateDTO dto) 
+    {
+        var parkingCreate = parkingMapper.toParkingCreate(dto);
+        var parking = parkingService.create(parkingCreate);
+        var result = parkingMapper.toParkingDTO(parking);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ParkingDTO> update(@PathVariable String id, @RequestBody ParkingCreateDTO parkingCreteDTO) 
+    {
+        Parking parkingUpdate = parkingMapper.toParkingCreate(parkingCreteDTO);
+        Parking parking = parkingService.update(id, parkingUpdate);
+        return ResponseEntity.ok(parkingMapper.toParkingDTO(parking));
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<ParkingDTO> checkOut(@PathVariable String id) 
+    {
+        Parking parking = parkingService.checkOut(id);
+        return ResponseEntity.ok(parkingMapper.toParkingDTO(parking));
+    }
+
 }

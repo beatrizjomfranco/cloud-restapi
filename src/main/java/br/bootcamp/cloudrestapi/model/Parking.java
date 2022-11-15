@@ -10,7 +10,22 @@ public class Parking {
     private String model;
     private String color;
     
-    //para importar --> botão direito --> source action --> organize imports --> cria o import
+    public Parking(String id, String license, String state, String model, String color) {
+        this.id = id;
+        this.license = license;
+        this.state = state;
+        this.model = model;
+        this.color = color;
+}
+
+
+//criação de um construtor sem parametro
+public Parking() {
+}
+
+
+
+//para importar --> botão direito --> source action --> organize imports --> cria o import
     private LocalDateTime entryDate;
     private LocalDateTime exitDate;
     

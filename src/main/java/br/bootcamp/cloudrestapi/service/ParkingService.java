@@ -75,7 +75,7 @@ public class ParkingService
     {
         Parking parking = findById(id);
         parking.setExitDate(LocalDateTime.now());
-        parking.setBill(ParkingCheckOut.getBill(parking));
+        parking.setBill(ParkingCheckout.getBill(parking));
         parkingRepo.save(parking);
         return parking;
     }

@@ -38,15 +38,12 @@ Fonte: https://www.zup.com.br/blog/spring-boot
 Project: Marven
 Language: Java
 Spring Boot: 2.7.5
-Group:one.bootcamp
-Artifact: cloud-spring
-Name:cloud-spring
-Description: Desafio de Projeto Cloud Parking
-Package: one.bootcamp.cloud-spring
+Group:br.bootcamp
+Artifact: cloud-restapi
+Name:cloud-restapi
+Description: realizando Deploy na Nuvem de um Conjunto de API’s Desenvolvida em Spring Boot
+Package: br.bootcamp.cloud-restapi
 Java: 11
-Dependencies: 
-Spring Web 
-Spring Boot Dev Tools
 
 Generate--> Extrair arquivo zipado --> abrir na IDE VSCode
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -57,7 +54,23 @@ spring-boot-starter-web --> Auxilia na construção de aplicações web trazendo
 
 spring-boot-devtools --> É um conjunto de funcionalidades que ajuda o trabalho de qualquer dev. Como, por exemplo, restart automático da aplicação quando ocorre alguma mudança no código.
 
-spring-boot-starter-test --> Contém a maioria das dependências necessárias para realizar testes da sua aplicação: Junit, AssertJ, Hamcrest, Mockito, entre outros
+org.modelmapper --> Mapeando Objeto para Objeto com ModelMapper
+
+springfox-swagger2 --> Swagger2 é um projeto de código aberto usado para gerar os documentos da API REST para serviços da Web RESTful.
+
+springfox-swagger-ui --> para interagir com a configuração, também é necessário adicionar a dependência que fornece o Swagger UI:
+
+spring-boot-starter-data-jpa --> O Spring Data JPA é uma framework que faz parte do conjunto de projetos do Spring Data que tem como finalidade tornar a integração de aplicações Spring com a JPA (Java Persistence API), uma de suas principais vantagens é a capacidade que o mesmo possui para criar a camada de acesso aos dados sem a necessidade de termos que implementar manualmente as famosas classes de DAO (Data Access Object).
+
+org.postgresql --> O PostgreSQL é um sistema de banco de dados objeto-relacional que tem as características de sistemas de bancos de dados comerciais tradicionais com melhoramentos encontrados nos sistemas SGBDs de próxima geração. PostgreSQL é livre e o código-fonte completo está disponível.
+
+spring-boot-starter-security --> Spring Security é um framework do projeto Spring que possui um sistema de autenticação e autorização de alto nível e altamente customizável para aplicações Java.
+
+io.rest-assured --> Rest-Assured é uma ferramenta que foi desenvolvida para facilitar a criação de testes automatizados para APIs REST.
+
+Spring Boot Starter Test: Contém a maioria das dependências necessárias para realizar testes da sua aplicação: Junit, AssertJ, Hamcrest, Mockito, entre outros.
+
+org.testcontainers --> é uma biblioteca Java que permite subir instâncias docker durantes o ciclo de testes.
 
 spring-boot-maven-plugin --> plugin para gerar o arquivo .jar
 
@@ -65,9 +78,12 @@ Fonte: https://www.zup.com.br/blog/spring-boot
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## 2. src --> main --> java\one\bootcamp
-Classe CloudSpringApplication.java --: rodar para montar a aplicação que será desenvolvida
 
-CloudSpringApplication fará todas as injeções de dependência para poder rodar a aplicação.
+CloudRestapiApplication.java
+
+Rodar para montar a aplicação que será desenvolvida
+
+CloudRestapiApplication fará todas as injeções de dependência para poder rodar a aplicação.
 
 Startou o Tomcat na porta 8080 --> 2022-11-14 14:56:11.727  INFO 8560 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path
 
@@ -78,14 +94,7 @@ This application has no explicit mapping for /error, so you are seeing this as a
 Mon Nov 14 15:13:27 BRT 2022
 There was an unexpected error (type=Not Found, status=404).
 No message available
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-## 3. Em Java Projects --> src/main/java --> criar um pacote one.bootcamp.cloudspring.controller e depois uma classe chamada HelloController.class
-@RestController
-@RequestMapping("/")
-    @GetMapping
-----------------------------------------------------------
+----------------------------------------------------------------------
 ## 4 Criar uma conta no Heroku
 Ir me create new app
 app name: bootcamp
@@ -96,13 +105,10 @@ Choose a stage to add this app to: production
 Clicar no botão create app
 
 ## 4.1 ir em open app para visualizar a página:
-
 https://bootcamp.herokuapp.com/
-
 Heroku | Welcome to your new app!
 
 ## 4.2 Conectar a conta do Heroku com a do Github
-
 Escolher o repositorio cloud-spring para se conectar
 Habilitar: enable automatic deploys
 Choose a branch to deploy: master e clique em deploy branch
@@ -122,7 +128,7 @@ Buildpacks are responsible for transforming deployed code into a slug, which can
 Heroku’s support for Ruby, Python, Java, Clojure, Node.js, Scala, Go and PHP is implemented via a set of open source buildpacks.
 fonte: https://devcenter.heroku.com/articles/buildpacks
 
-## 4.3 Para sanar esse problema, vá na ide e na raiz (cloud-spring) crie um arquivo system.properties e defina a versão java a qual se está trabalhando
+## 4.3 Para sanar esse problema, vá na ide e na raiz (cloud-restapi) crie um arquivo system.properties e defina a versão java a qual se está trabalhando
 java.runtime.version=11
 
 fazer o commit para atualizar do repo no github
@@ -144,6 +150,5 @@ pacote repository --> interface ParkingRepo
 pacote service --> classes ParkingCheckout.java e ParkingService.java
 ------------------------------------------------------
 
-## 5. Arquivo para rodar a aplicação no VSCode
-CloudRestapiApplication.java
+
 
